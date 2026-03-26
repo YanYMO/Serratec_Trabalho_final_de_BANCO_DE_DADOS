@@ -28,7 +28,7 @@
 
 #### Exemplo 5: A média de consultas por dentista.
 
-## Colaboradores
+## Colaboradores:
 
 - [@lcamaraol](https://github.com/lcamaraol)
 - [@Brun0Fr3itas](https://github.com/Brun0Fr3itas)
