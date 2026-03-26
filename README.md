@@ -1,6 +1,5 @@
 # Projeto: Sistema de Gestão para Clínica Odontológica
 
-<<<<<<< HEAD
 ## O projeto contempla a modelagem <b>CONCEITUAL, LÓGICA</b> (feitas no site BRModelo: https://app.brmodeloweb.com/) e <b>FÍSICA</b> (feita no pgAdmin 4: https://www.pgadmin.org/) de um <b>BANCO DE DADOS</b> (PosgreSQL: https://www.postgresql.org/) para o armazenamento dos dados necessários para a gestão dos pacientes, dentistas, consultas, procedimentos e horários. Sendo possível buscar informações relacionadas a todas as entidades mencionadas e seus relacionamentos.
 
 ## Esse modelo poderia ser usado por uma clínica ou apenas um profissional da área de psicologia, que realize seus atendimentos de forma remota. Já que ele é capas de armazenar as informações dos pacientes, profissionais, atendimentos, horários de disponibilidade, consultas e armazena o histórico de todas essas informações de forma coesa.
@@ -36,8 +35,3 @@
 - [@pedrohgmello](https://github.com/pedrohgmello)
 - [@Valois1961](https://github.com/Valois1961)
 - [@YanYMO](https://github.com/YanYMO)
-=======
-## O projeto contempla a modelagem conceitual, lógica e física de uma banco de dados para o armazenamento dos dados necessários para a gestão dos pacientes, dentistas, consultas, procedimentos e horários. Sendo possível buscar informações relacionadas a todas as entidades mencionadas e seus relacionamentos.
-
-![Print do modelo conceitual] ()
->>>>>>> a94dc226a2607a85672588b8c747eb9ec70b2733
