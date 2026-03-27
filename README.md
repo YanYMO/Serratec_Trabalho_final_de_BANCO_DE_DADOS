@@ -337,7 +337,7 @@ DELETE FROM
 WHERE
 	id_consulta=1 AND id_procedimento=2;
 
-SELECT * FROM matriz.realiza
+SELECT * FROM matriz.realiza;
 
 ----------------------------- Mudança na grade de horários do dentista -------------------------------
 -- Dra. Mariana (id = 1) não vai mais poder atender às segundas-feiras no primeiro horário (id = 1) --
@@ -347,7 +347,7 @@ DELETE FROM
 WHERE
 	id_horario=1 AND id_dentista=1;
 
-select * from matriz.disponibilidade
+SELECT * FROM matriz.disponibilidade;
 
 --------------------------------------- Cancelamento de consulta -------------------------------------------
 -- O paciente Henrique estava no telefone com a recepção que criou uma consulta (id=8) até que a chamada  --
@@ -358,7 +358,7 @@ DELETE FROM
 WHERE
 	id_consulta=8;
 
-SELECT * FROM matriz.consulta
+SELECT * FROM matriz.consulta;
 
 -------------------------------------------------------------
 -- Criando indice em id_paciente (fk) na tabela "consulta" --
@@ -394,7 +394,7 @@ AND id_dentista = 1
 AND data_consulta = '2026-04-03'
 AND hora_consulta = '14:00:00';
 
-SELECT * FROM matriz.consulta WHERE	id_paciente=6
+SELECT * FROM matriz.consulta WHERE	id_paciente=6;
 
 ------------------------------------------ Mudança de endereço de paciente --------------------------------------------------
 -- Paciente de cpf 123.456.789-01 ligou para fazer uma nova consulta e avisou que se mudou, então a recepção vai atualizar --
@@ -406,7 +406,7 @@ SET
 WHERE
 	cpf='12345678901';
 
-SELECT * FROM matriz.paciente
+SELECT * FROM matriz.paciente;
 
 --------------------------------------- Ajuste de tempo de procedimento ------------------------------------------------------
 -- A gerencia da clinica percebeu que o procedimento limpeza esta atrasando a agenda, então decidem alterar a duração média --
