@@ -485,7 +485,7 @@ SELECT
     (SELECT MAX(data_consulta) FROM matriz.consulta) AS data_fim_coleta,
 	(SELECT MAX(data_consulta) - MIN(data_consulta) FROM matriz.consulta) AS total_dias_corridos
 	FROM (
-        -- Subquery: Calcula a média geral de forma isolada --
+        -- Subquery: Conta quantas consultas foram feitas e agrupa os dentistas -- 
 		SELECT COUNT(c2.id_consulta) AS total_consultas
         	FROM matriz.dentista AS d2
             LEFT JOIN matriz.consulta AS c2
