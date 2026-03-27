@@ -1,6 +1,6 @@
 # Projeto: Sistema de Gestão para Clínica Odontológica
 
-## O projeto contempla a modelagem <b>CONCEITUAL, LÓGICA</b> (feitas no site BRModelo: https://app.brmodeloweb.com/) e <b>FÍSICA</b> (feita no pgAdmin 4: https://www.pgadmin.org/) de um <b>BANCO DE DADOS</b> (PosgreSQL: https://www.postgresql.org/) para o armazenamento dos dados necessários para a gestão dos pacientes, dentistas, consultas, procedimentos e horários.
+## O projeto contempla a modelagem <b>CONCEITUAL, LÓGICA</b> (feitas no site BRModelo: https://app.brmodeloweb.com/) e <b>FÍSICA</b> (feita no pgAdmin 4: https://www.pgadmin.org/) de um <b>BANCO DE DADOS</b> (PostgreSQL: https://www.postgresql.org/) para o armazenamento dos dados necessários para a gestão dos pacientes, dentistas, consultas, procedimentos e horários.
 
 ### Esse modelo poderia ser usado em outros tipos de clínicas médicas, talvez sendo necessário apenas alguns ajustes para que ele se enquadre na regra de negócio solicitada. Já que ele é capas de armazenar as informações dos pacientes, profissionais, atendimentos, horários de disponibilidade, consultas e armazena o histórico de todas essas informações de forma coesa.
 
@@ -46,7 +46,7 @@ CREATE TABLE matriz.paciente (
     	CHECK (telefone ~ '^\(\d{2}\) \d{5}-\d{4}$'),
 
 	CONSTRAINT chk_cep_formato
-		CHECK (cep ~ '^\d{5}-\d{3}$')	
+		CHECK (cep ~ '^\d{5}-\d{3}$')
 );
 
 ---------------------
@@ -68,7 +68,7 @@ CREATE TABLE matriz.horario (
     dia_semana VARCHAR(10),
     horario_inicio TIME NOT NULL,
     horario_fim TIME NOT NULL
-	
+
 	CONSTRAINT chk_dia_semana
     CHECK (dia_semana IN ('Segunda', 'Terça', 'Quarta', 'Quinta', 'Sexta', 'Sábado'))
 
@@ -159,6 +159,7 @@ CREATE TABLE matriz.realiza (
         ON UPDATE CASCADE
 );
 ```
+
 ## A segunda parte é uma simulação de inserção de dados, referentes a cada tabela do banco de dados. Primeiro preenchendo as tabelas "mães" e após preenchendo as tabelas "filhas", assim registrando as cardinalidades corretamente. Exemplo: Não é possível cadastrar uma consulta para um cliente que ainda não existe.
 
 ```SQL
@@ -236,14 +237,14 @@ VALUES
 ---------------------------------------------
 -- Agenda de disponibilidade dos dentistas --
 ---------------------------------------------
-INSERT INTO matriz.disponibilidade 
+INSERT INTO matriz.disponibilidade
 (id_horario, id_dentista)
 VALUES
-(1, 1), (2, 1), (3, 1), (4, 1), (7, 1), 
-(1, 2), (2, 2), (3, 2), (5, 2), (8, 2), 
-(14, 2), (4, 3), (5, 3), (9, 3), (10, 3),         
-(6, 4), (19, 4), (7, 5), (20, 5), (1, 6), 
-(2, 6), (11, 7), (12, 7), (3, 7), (13, 8), 
+(1, 1), (2, 1), (3, 1), (4, 1), (7, 1),
+(1, 2), (2, 2), (3, 2), (5, 2), (8, 2),
+(14, 2), (4, 3), (5, 3), (9, 3), (10, 3),
+(6, 4), (19, 4), (7, 5), (20, 5), (1, 6),
+(2, 6), (11, 7), (12, 7), (3, 7), (13, 8),
 (14, 8), (15, 9), (16, 9), (17, 10), (18, 10);
 
 ------------------------------------------
@@ -313,17 +314,18 @@ VALUES
 ------------------------------------------------
 -- Procedimentos realizados por cada consulta --
 ------------------------------------------------
-INSERT INTO matriz.realiza 
+INSERT INTO matriz.realiza
 (id_consulta, id_procedimento)
 VALUES
 (1, 1), (1, 2), (2, 1), (3, 3), (4, 4), (5, 5), (6, 2),
-(7, 6), (8, 1), (9, 3), (11, 8), (12, 10), (13, 4), 
-(14, 6), (15, 10), (16, 1), (17, 9), (18, 1), (19, 6), 
-(20, 1), (21, 3), (22, 1), (23, 10), (24, 4), (25, 2), 
-(26, 6), (27, 8), (28, 2), (29, 5), (30, 1), (31, 4), 
+(7, 6), (8, 1), (9, 3), (11, 8), (12, 10), (13, 4),
+(14, 6), (15, 10), (16, 1), (17, 9), (18, 1), (19, 6),
+(20, 1), (21, 3), (22, 1), (23, 10), (24, 4), (25, 2),
+(26, 6), (27, 8), (28, 2), (29, 5), (30, 1), (31, 4),
 (32, 6), (33, 10), (34, 3), (35, 9), (36, 7), (37, 5),
 (38, 1), (39, 6), (40, 10);
 ```
+
 ## A terceira parte contem comandos SQL simulando possíveis eventos, como os exemplos abaixo:
 
 ```SQL
@@ -340,7 +342,7 @@ SELECT * FROM matriz.realiza
 ----------------------------- Mudança na grade de horários do dentista -------------------------------
 -- Dra. Mariana (id = 1) não vai mais poder atender às segundas-feiras no primeiro horário (id = 1) --
 ------------------------------------------------------------------------------------------------------
-DELETE FROM 
+DELETE FROM
 	matriz.disponibilidade
 WHERE
 	id_horario=1 AND id_dentista=1;
@@ -364,7 +366,7 @@ SELECT * FROM matriz.consulta
 CREATE INDEX idx_consulta_id_paciente ON matriz.consulta (id_paciente);
 
 ----------------------------------------------------------
--- Criando indice em data_consulta na tabela "consulta" -- 
+-- Criando indice em data_consulta na tabela "consulta" --
 ----------------------------------------------------------
 CREATE INDEX idx_consulta_data_consulta ON matriz.consulta (data_consulta);
 
@@ -375,13 +377,13 @@ CREATE INDEX idx_consulta_data_consulta ON matriz.consulta (data_consulta);
 UPDATE matriz.consulta
 SET
 	status='Realizada',
-	
+
 	prescricao= '1. Amoxicilina 500mg: Tomar 1 comprimido de 8 em 8 horas por 7 dias.
 	2. Ibuprofeno 600mg: Tomar 1 comprimido de 12 em 12 horas por 3 dias (em caso de dor ou inchaço).
 	3. Repouso absoluto nas primeiras 24 horas.
 	4. Dieta líquida ou pastosa e fria (sorvete, açaí, sopas frias) nos primeiros 2 dias.
 	5. Aplicar compressa de gelo no rosto por 20 minutos a cada hora.',
-	
+
 	descricao_atendimento='Paciente compareceu à clínica para a extração do dente 38 (siso inferior esquerdo).
 	Procedimento cirúrgico realizado sob anestesia local, sem intercorrências.
 	Feita a sutura no local.
@@ -421,17 +423,17 @@ SELECT * FROM matriz.procedimento;
 -- View: Lista de Consultas Realizadas, ordenada da mais recente para a mais antiga --
 --------------------------------------------------------------------------------------
 CREATE VIEW matriz.vw_lista_consultas AS
-SELECT 
-	c.id_consulta,	
+SELECT
+	c.id_consulta,
 	p.nome_completo AS nome_paciente,
 	d.nome_completo AS nome_dentista,
-    c.data_consulta,    
+    c.data_consulta,
     c.status,
 	proc.nome AS procedimento
 FROM matriz.consulta AS c
-INNER JOIN matriz.paciente AS p 
+INNER JOIN matriz.paciente AS p
     ON c.id_paciente = p.id_paciente
-INNER JOIN matriz.dentista AS d 
+INNER JOIN matriz.dentista AS d
     ON c.id_dentista = d.id_dentista
 INNER JOIN matriz.realiza AS r
 	ON c.id_consulta=r.id_consulta
@@ -439,9 +441,9 @@ INNER JOIN matriz.procedimento AS proc
 	ON r.id_procedimento=proc.id_procedimento
 WHERE
 	status!='Cancelada' AND status!='Agendada'
-ORDER BY 
+ORDER BY
     c.data_consulta DESC;
-   
+
 SELECT * FROM matriz.vw_lista_consultas;
 
 ------------------------------------------
@@ -449,7 +451,7 @@ SELECT * FROM matriz.vw_lista_consultas;
 ------------------------------------------
 SELECT
 	d.especialidade,
-	COUNT(c.id_consulta) AS quantidade_consulta		
+	COUNT(c.id_consulta) AS quantidade_consulta
 FROM matriz.consulta AS c
 INNER JOIN
 	matriz.dentista AS d
@@ -458,13 +460,13 @@ GROUP BY
 	d.especialidade
 ORDER BY
 	quantidade_consulta DESC;
-	
+
 ----------------------------
 -- Consultas por dentista --
 ----------------------------
 SELECT
 	d.nome_completo,
-	COUNT(c.id_consulta) AS quantidade_consulta	
+	COUNT(c.id_consulta) AS quantidade_consulta
 FROM matriz.consulta AS c
 INNER JOIN
 	matriz.dentista AS d
@@ -477,16 +479,16 @@ ORDER BY
 ------------------------------------------------------------------------------
 -- Média de consultas realizadas por dentista em período de dias específico --
 ------------------------------------------------------------------------------
-SELECT 
+SELECT
 	ROUND(AVG("Média geral de consultas".total_consultas), 2) "Média de consultas por dentista",
     (SELECT MIN(data_consulta) FROM matriz.consulta) AS data_inicio_coleta,
     (SELECT MAX(data_consulta) FROM matriz.consulta) AS data_fim_coleta,
 	(SELECT MAX(data_consulta) - MIN(data_consulta) FROM matriz.consulta) AS total_dias_corridos
 	FROM (
-        -- Subquery: Calcula a média geral de forma isolada --       
+        -- Subquery: Calcula a média geral de forma isolada --
 		SELECT COUNT(c2.id_consulta) AS total_consultas
         	FROM matriz.dentista AS d2
-            LEFT JOIN matriz.consulta AS c2 
+            LEFT JOIN matriz.consulta AS c2
                 ON d2.id_dentista = c2.id_dentista
 					WHERE c2.status = 'Realizada'
             GROUP BY d2.id_dentista
