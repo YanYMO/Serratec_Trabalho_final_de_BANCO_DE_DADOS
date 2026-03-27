@@ -6,11 +6,11 @@
 
 ## Modelo Conceitual:
 
-![alt text](<Prints/Modelo Conceitual.png>)
+![alt text](<Assets/Modelo Conceitual.png>)
 
 ## Modelo Lógico:
 
-![alt text](<Prints/Modelo Lógico.png>)
+![alt text](<Assets/Modelo Lógico.png>)
 
 ## Modelo Físico:
 
@@ -443,6 +443,54 @@ ORDER BY
     c.data_consulta DESC;
    
 SELECT * FROM matriz.vw_lista_consultas;
+
+------------------------------------------
+-- Consultas marcadas por especialidade --
+------------------------------------------
+SELECT
+	d.especialidade,
+	COUNT(c.id_consulta) AS quantidade_consulta		
+FROM matriz.consulta AS c
+INNER JOIN
+	matriz.dentista AS d
+ON d.id_dentista=c.id_dentista
+GROUP BY
+	d.especialidade
+ORDER BY
+	quantidade_consulta DESC;
+	
+----------------------------
+-- Consultas por dentista --
+----------------------------
+SELECT
+	d.nome_completo,
+	COUNT(c.id_consulta) AS quantidade_consulta	
+FROM matriz.consulta AS c
+INNER JOIN
+	matriz.dentista AS d
+ON d.id_dentista=c.id_dentista
+GROUP BY
+	d.nome_completo
+ORDER BY
+	quantidade_consulta DESC;
+
+------------------------------------------------------------------------------
+-- Média de consultas realizadas por dentista em período de dias específico --
+------------------------------------------------------------------------------
+SELECT 
+	ROUND(AVG("Média geral de consultas".total_consultas), 2) "Média de consultas por dentista",
+    (SELECT MIN(data_consulta) FROM matriz.consulta) AS data_inicio_coleta,
+    (SELECT MAX(data_consulta) FROM matriz.consulta) AS data_fim_coleta,
+	(SELECT MAX(data_consulta) - MIN(data_consulta) FROM matriz.consulta) AS total_dias_corridos
+	FROM (
+        -- Subquery: Calcula a média geral de forma isolada --       
+		SELECT COUNT(c2.id_consulta) AS total_consultas
+        	FROM matriz.dentista AS d2
+            LEFT JOIN matriz.consulta AS c2 
+                ON d2.id_dentista = c2.id_dentista
+					WHERE c2.status = 'Realizada'
+            GROUP BY d2.id_dentista
+        ) AS "Média geral de consultas";
 ```
 
 ## Colaboradores:
@@ -453,4 +501,4 @@ SELECT * FROM matriz.vw_lista_consultas;
 - [@Valois1961](https://github.com/Valois1961)
 - [@YanYMO](https://github.com/YanYMO)
 
-![Pooh agradecendo](Prints/pooh-cute.gif)
+![Pooh agradecendo](Assets/pooh-cute.gif)
