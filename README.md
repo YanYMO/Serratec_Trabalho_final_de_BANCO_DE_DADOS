@@ -453,4 +453,4 @@ SELECT * FROM matriz.vw_lista_consultas;
 - [@Valois1961](https://github.com/Valois1961)
 - [@YanYMO](https://github.com/YanYMO)
 
-![Pooh agradecendo](https://tenor.com/pt-BR/view/pooh-cute-happy-thank-you-winnie-the-pooh-gif-14892560)
+![Pooh agradecendo](Prints/pooh-cute.gif)
